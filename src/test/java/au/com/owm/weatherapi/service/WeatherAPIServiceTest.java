@@ -51,7 +51,7 @@ public class WeatherAPIServiceTest {
     public void testApiKeyUsageExceeded() {
         when(weatherApiRepository.findWeatherApikeyEntityBy(any())).thenReturn(new WeatherApikeyEntity("60f4084d4a116eb07ef41ff89f64e1de", 5, LocalDateTime.now()));
         WeatherApiException weatherApiException = Assertions.assertThrows(WeatherApiException.class, () -> weatherAPIService.getWeatherDescription(queryParams));
-        Assertions.assertEquals("API Key Usage Limit has been exceeded more than allocated limit in an hour. Use different API Key",
+        Assertions.assertEquals("API Key Usage limit exceeded in an hour. Use different API Key",
                 weatherApiException.getErrorMessage());
     }
 }

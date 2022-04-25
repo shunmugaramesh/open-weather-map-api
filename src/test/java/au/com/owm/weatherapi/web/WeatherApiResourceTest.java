@@ -73,7 +73,7 @@ public class WeatherApiResourceTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/weatherapi/v1/description?city=345345&country=Australia&apiKey=60f4084d4a116eb07ef41ff89f64e1de"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errorCode").value("BAD_REQUEST"))
-                .andExpect(jsonPath("$.errorMessage").value("Invalid query param. Enter valid apiKey, city and country"));
+                .andExpect(jsonPath("$.errorMessage").value("Invalid query param. Enter valid apiKey and city"));
     }
 
     @Test

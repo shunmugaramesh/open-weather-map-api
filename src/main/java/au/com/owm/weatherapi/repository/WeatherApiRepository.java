@@ -32,8 +32,8 @@ public class WeatherApiRepository {
         int incr = weatherApikeyEntity.getNoOfTimesRequested();
         int executeUpdate = entityManager
                 .createNativeQuery("UPDATE api_key_log " +
-                        "SET NO_OF_TIMES_REQUESTED = :API_KEY_USAGE" +
-                        " WHERE API_KEY = :API_KEY")
+                        "SET NO_OF_TIMES_REQUESTED = :apiKeyUsage" +
+                        " WHERE API_KEY = :apiKey")
                 .setParameter(API_KEY, weatherApikeyEntity.getApiKey())
                 .setParameter(API_KEY_USAGE, ++incr)
                 .executeUpdate();

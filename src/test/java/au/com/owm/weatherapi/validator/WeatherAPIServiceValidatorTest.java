@@ -33,11 +33,11 @@ public class WeatherAPIServiceValidatorTest {
     @Test
     public void missingInvalidInputQueryParams() {
         Map<String, String> queryParams = Map.of("apiKey", "60f4084d4a116eb07ef41ff89f64e1de",
-                "city", "Sydney",
-                "country", "23232323");
+                "city", "324244",
+                "country", "Australia");
         WeatherApiException weatherApiException = Assertions.assertThrows(WeatherApiException.class,
                 () -> weatherAPIServiceValidator.validateInputQueryParams(queryParams));
         Assertions.assertEquals(BAD_REQUEST, weatherApiException.getErrorCode());
-        Assertions.assertEquals("Invalid query param. Enter valid apiKey, city and country", weatherApiException.getErrorMessage());
+        Assertions.assertEquals("Invalid query param. Enter valid apiKey and city", weatherApiException.getErrorMessage());
     }
 }
