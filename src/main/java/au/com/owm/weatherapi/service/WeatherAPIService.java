@@ -71,7 +71,7 @@ public class WeatherAPIService {
         WeatherApikeyEntity weatherApikeyEntity = new WeatherApikeyEntity();
         weatherApikeyEntity.setApiKey(apiKey);
         weatherApikeyEntity.setLocalDateTime(LocalDateTime.now());
-        weatherApikeyEntity.setNoOfTimesRequested(apiKeyUsage);
+        weatherApikeyEntity.setNoOfTimesRequested(++apiKeyUsage);
         log.debug("Calling H2 DB with input: {}", weatherApikeyEntity);
         weatherApiRepository.saveWeatherApikeyEntity(weatherApikeyEntity);
     }
@@ -85,8 +85,9 @@ public class WeatherAPIService {
             ZonedDateTime now = localDateTime.atZone(ZoneId.of("Australia/Sydney"));
             Duration duration = Duration.between(weatherApikeyEntity.getLocalDateTime(), now);
             if (duration.toHours() < 1 && weatherApikeyEntity.getNoOfTimesRequested() >= 5) {
-                log.error("API Key Usage limit exceeded in an hour");
-                throw WeatherApiException.generic("API Key Usage limit exceeded in an hour. Use different API Key");
+                log.error("API Key Usage exceeded hourly limit");
+                apiKeyUsage = 0;
+                throw WeatherApiException.generic("API Key Usage exceeded hourly limit. Use different API Key");
 
             }
         }

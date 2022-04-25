@@ -29,13 +29,13 @@ public class WeatherApiRepository {
     }
 
     public void saveWeatherApikeyEntity(WeatherApikeyEntity weatherApikeyEntity) {
-        int incr = weatherApikeyEntity.getNoOfTimesRequested();
+        int noOfTimesRequested = weatherApikeyEntity.getNoOfTimesRequested();
         int executeUpdate = entityManager
                 .createNativeQuery("UPDATE api_key_log " +
                         "SET NO_OF_TIMES_REQUESTED = :apiKeyUsage" +
                         " WHERE API_KEY = :apiKey")
                 .setParameter(API_KEY, weatherApikeyEntity.getApiKey())
-                .setParameter(API_KEY_USAGE, ++incr)
+                .setParameter(API_KEY_USAGE, noOfTimesRequested)
                 .executeUpdate();
         if (executeUpdate != 1) {
             entityManager.merge(weatherApikeyEntity);
