@@ -31,3 +31,5 @@ I didn't do save and retrieve the result from DB as they are repetitive.
 * Start the application with mvn spring-boot:run
 * Hit the app with any REST client using http://localhost:8080/weatherapi/v1/description?city={city}&country={country}&apiKey={apiKey}} 
     Eg: http://localhost:8080/weatherapi/v1/description?city=Melbourne&country=Australia&apiKey=60f4084d4a116eb07ef41ff89f64e1de
+* Access h2 database using URL http://localhost:8080/h2 Username : sa. No password.
+    * Table and Columns will be auto created on app start up.
